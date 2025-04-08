@@ -3358,21 +3358,7 @@ namespace Citric_Composer {
                 if (f.FileId == -2) {
                     f = null;
                 }
-                string fileName = f.ExternalFileName;
-                if (fileName != null) {
-                    int dashIdx = fileName.LastIndexOf("/");
-                    if (dashIdx == -1) fileName.LastIndexOf("\\");
-                    fileName = fileName.Substring(dashIdx + 1);
-                    int pathIdx = fileName.LastIndexOf(".");
-                    if (pathIdx != -1)
-                    {
-                        fileName = fileName.Substring(0, pathIdx);
-                    }
-                }
-                else
-                {
-                    fileName = f.FileName;
-                }
+                string fileName = (f.ExternalFileName != null) ? Path.GetFileNameWithoutExtension(f.ExternalFileName) : f.FileName;
                 foreach (StreamEntry testEntry in File.Streams)
                 {
                     if (testEntry.Name.CompareTo(fileName) == 0)
